@@ -1,0 +1,5 @@
+ - Salvar com sucesso
+ - Salvar com campos em brancos
+ - Valor invalido
+ - Nome > 30 (Limite)
+ - Valor >30 (Limite)

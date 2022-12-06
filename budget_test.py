@@ -16,7 +16,7 @@ class AndroidBudget(unittest.TestCase):
     def setUp(self):
         desired_caps = {}
         desired_caps['platformName'] = 'Android'
-        desired_caps['deviceName'] = 'emulator-5554'
+        desired_caps['deviceName'] = 'emulator-5556'
         desired_caps['appPackage'] = 'protect.budgetwatch'
         desired_caps['appActivity'] = '.MainActivity'
         with warnings.catch_warnings():
@@ -50,7 +50,7 @@ class AndroidBudget(unittest.TestCase):
 
         self.assertEqual("energia", self.driver.find_element(By.XPATH, "//android.widget.TextView[contains(@text, 'energia')]").get_attribute('text'))
 
-    def test_app_budget_add_error(self):
+    def test_app_budget_add_valor_invalido(self):
 
         self.driver.implicitly_wait(30)
 
@@ -70,6 +70,81 @@ class AndroidBudget(unittest.TestCase):
 
         value = self.driver.find_element(By.ID, 'protect.budgetwatch:id/valueEdit')
         value.set_text("abcdefg")
+
+        save = self.driver.find_element(By.ID, 'protect.budgetwatch:id/action_save')
+        save.click()
+
+        self.assertEqual('Budget value is empty',
+                         self.driver.find_element(By.ID, 'protect.budgetwatch:id/snackbar_text').get_attribute('text'))
+
+    def test_app_budget_add_campos_vazios(self):
+
+        self.driver.implicitly_wait(30)
+
+        if self.driver.find_element(By.XPATH, "//android.widget.TextView[contains(@text, 'Welcome to Budget Watch')]"):
+            skip = self.driver.find_element(By.ID, 'protect.budgetwatch:id/skip')
+            skip.click()
+
+        # clicar em budget
+        budget = self.driver.find_element(By.ID, 'protect.budgetwatch:id/image')
+        budget.click()
+
+        add = self.driver.find_element(By.ID, 'protect.budgetwatch:id/action_add')
+        add.click()
+
+        save = self.driver.find_element(By.ID, 'protect.budgetwatch:id/action_save')
+        save.click()
+
+        self.assertEqual('Budget value is empty',
+                         self.driver.find_element(By.ID, 'protect.budgetwatch:id/snackbar_text').get_attribute('text'))
+
+    def test_app_budget_add_nome_acima_30(self):
+
+        self.driver.implicitly_wait(30)
+
+        if self.driver.find_element(By.XPATH, "//android.widget.TextView[contains(@text, 'Welcome to Budget Watch')]"):
+            skip = self.driver.find_element(By.ID, 'protect.budgetwatch:id/skip')
+            skip.click()
+
+        # clicar em budget
+        budget = self.driver.find_element(By.ID, 'protect.budgetwatch:id/image')
+        budget.click()
+
+        add = self.driver.find_element(By.ID, 'protect.budgetwatch:id/action_add')
+        add.click()
+
+        name = self.driver.find_element(By.ID, 'protect.budgetwatch:id/budgetNameEdit')
+        name.set_text("nome de uma gasto com mais de 30 carácter")
+
+        value = self.driver.find_element(By.ID, 'protect.budgetwatch:id/valueEdit')
+        value.set_text("30")
+
+        save = self.driver.find_element(By.ID, 'protect.budgetwatch:id/action_save')
+        save.click()
+
+        self.assertEqual('Budget value is empty',
+                         self.driver.find_element(By.ID, 'protect.budgetwatch:id/snackbar_text').get_attribute('text'))
+
+    def test_app_budget_add_valor_acima_30(self):
+
+        self.driver.implicitly_wait(30)
+
+        if self.driver.find_element(By.XPATH, "//android.widget.TextView[contains(@text, 'Welcome to Budget Watch')]"):
+            skip = self.driver.find_element(By.ID, 'protect.budgetwatch:id/skip')
+            skip.click()
+
+        # clicar em budget
+        budget = self.driver.find_element(By.ID, 'protect.budgetwatch:id/image')
+        budget.click()
+
+        add = self.driver.find_element(By.ID, 'protect.budgetwatch:id/action_add')
+        add.click()
+
+        name = self.driver.find_element(By.ID, 'protect.budgetwatch:id/budgetNameEdit')
+        name.set_text("Gasto 1")
+
+        value = self.driver.find_element(By.ID, 'protect.budgetwatch:id/valueEdit')
+        value.set_text("300000000000000000000000000000000000000000")
 
         save = self.driver.find_element(By.ID, 'protect.budgetwatch:id/action_save')
         save.click()
