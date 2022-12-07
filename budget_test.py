@@ -183,13 +183,10 @@ class AndroidBudget(unittest.TestCase):
 
         self.driver.implicitly_wait(30)
 
-        actions = TouchAction(self.driver)
-
         if self.driver.find_element(By.XPATH, "//android.widget.TextView[contains(@text, 'Welcome to Budget Watch')]"):
             skip = self.driver.find_element(By.ID, 'protect.budgetwatch:id/skip')
             skip.click()
 
-        # clicar em budget
         budget = self.driver.find_element(By.XPATH,
                                           "//android.widget.TextView[contains(@text, 'Budgets')]")
         budget.click()
@@ -198,20 +195,96 @@ class AndroidBudget(unittest.TestCase):
         add.click()
 
         name = self.driver.find_element(By.ID, 'protect.budgetwatch:id/budgetNameEdit')
-        name.set_text("energia")
+        name.set_text("Aluguel")
 
         value = self.driver.find_element(By.ID, 'protect.budgetwatch:id/valueEdit')
-        value.set_text("500")
+        value.set_text("900")
 
         save = self.driver.find_element(By.ID, 'protect.budgetwatch:id/action_save')
         save.click()
 
-        # Long click no budget salvo
-        budgetEdit = self.driver.find_element(By.XPATH,
-                                          "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.LinearLayout[2]/android.widget.RelativeLayout/android.widget.ListView/android.widget.LinearLayout/android.widget.LinearLayout")
+        self.assertEqual("Internet", self.driver.find_element(By.XPATH,
+                                                              "//android.widget.TextView[contains(@text, 'Internet')]").get_attribute(
+            'text'))
 
-        actions.long_press(budgetEdit)
+        actions = TouchAction(self.driver)
+
+        item = self.driver.find_element(By.XPATH, "//android.widget.TextView[contains(@text, 'Internet')]")
+        actions.long_press(item)
         actions.perform()
+
+        editbutton = self.driver.find_element(By.XPATH, "//android.widget.TextView[contains(@text, 'Edit')]")
+        editbutton.click()
+
+        ectionedit = self.driver.find_element(By.ID, 'protect.budgetwatch:id/action_edit')
+        ectionedit.click()
+
+        textoeditado = self.driver.find_element(By.ID, 'protect.budgetwatch:id/budgetNameEdit')
+        textoeditado.set_text("Casa")
+
+        valueeditado = self.driver.find_element(By.ID, 'protect.budgetwatch:id/valueEdit')
+        valueeditado.set_text("1200")
+
+        savebutton = self.driver.find_element(By.XPATH, '//android.widget.TextView[@content-desc="Save"]')
+        savebutton.click()
+
+        self.assertEqual("Internet", self.driver.find_element(By.XPATH,
+                                                              "//android.widget.TextView[contains(@text, 'Internet')]").get_attribute(
+            'text'))
+
+    def test_app_budget_delete(self):
+
+        self.driver.implicitly_wait(30)
+
+        if self.driver.find_element(By.XPATH, "//android.widget.TextView[contains(@text, 'Welcome to Budget Watch')]"):
+            skip = self.driver.find_element(By.ID, 'protect.budgetwatch:id/skip')
+            skip.click()
+
+        budget = self.driver.find_element(By.XPATH,
+                                          "//android.widget.TextView[contains(@text, 'Budgets')]")
+        budget.click()
+
+        add = self.driver.find_element(By.ID, 'protect.budgetwatch:id/action_add')
+        add.click()
+
+        name = self.driver.find_element(By.ID, 'protect.budgetwatch:id/budgetNameEdit')
+        name.set_text("Carro")
+
+        value = self.driver.find_element(By.ID, 'protect.budgetwatch:id/valueEdit')
+        value.set_text("950")
+
+        save = self.driver.find_element(By.ID, 'protect.budgetwatch:id/action_save')
+        save.click()
+
+        self.assertEqual("Carro", self.driver.find_element(By.XPATH, "//android.widget.TextView[contains(@text, 'Carro')]").get_attribute('text'))
+
+        actions = TouchAction(self.driver)
+
+        item = self.driver.find_element(By.XPATH, "//android.widget.TextView[contains(@text, 'Carro')]")
+        actions.long_press(item)
+        actions.perform()
+
+        editbutton = self.driver.find_element(By.XPATH, "//android.widget.TextView[contains(@text, 'Edit')]")
+        editbutton.click()
+
+        ectionedit = self.driver.find_element(By.ID, 'protect.budgetwatch:id/action_edit')
+        ectionedit.click()
+
+        deletmenu = self.driver.find_element(By.XPATH,'//android.widget.ImageView[@content-desc="More options"]')
+        deletmenu.click()
+
+        delete = self.driver.find_element(By.XPATH, "//android.widget.TextView[contains(@text, 'Delete')]")
+        delete.click()
+
+        confirm = self.driver.find_element(By.ID, "android:id/button1")
+        confirm.click()
+
+        self.assertEqual("You don't have any budgets at the moment. Click the + (plus) button up top "
+                         'to get started.\n'
+                         '\n'
+                         'Budget Watch lets you create budgets, then track spending during the month.',
+                         self.driver.find_element(By.ID,
+                                                  "protect.budgetwatch:id/helpText").get_attribute('text'))
 
     def tearDown(self):
         self.driver.quit()
