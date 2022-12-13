@@ -50,7 +50,7 @@ class AndroidBudget(unittest.TestCase):
 
         self.assertEqual("energia", self.driver.find_element(By.XPATH, "//android.widget.TextView[contains(@text, 'energia')]").get_attribute('text'))
 
-    def test_app_budget_add_nome_invalido(self):
+    def test_app_budget_add_nome_invalid(self):
 
         self.driver.implicitly_wait(30)
 
@@ -77,7 +77,7 @@ class AndroidBudget(unittest.TestCase):
         self.assertEqual('Budget type is empty',
                          self.driver.find_element(By.ID, 'protect.budgetwatch:id/snackbar_text').get_attribute('text'))
 
-    def test_app_budget_add_valor_invalido(self):
+    def test_app_budget_add_valor_invalid(self):
 
         self.driver.implicitly_wait(30)
 

@@ -1,0 +1,19 @@
+Projeto Final - Automação de Teste
+
+Criar projeto de automação de teste com Appium utilizando o padrão Page Objects da aplicaço Money Track formulário Add Income ou Add Expense.
+
+Requisitos do Formulário Income/Expense
+
+- Campo price possui limite de 13 caracteres, só aceita números e não pode ser vazio
+- Campo Category não pode ser vazio e spo deve aceitar letras
+- Pode salvar income/expense de datas no passado e no presente somente
+- Lista de incomes e expenses salvos devem ser exibidos na tela Records. Para exibir registros de datas anteriores basta clicar no seletor Week (parte superior da tela à direita) e selecionar "All time"
+- incomes/expenses podem ser editados e removidos
+
+Crie testes automáticos para cobrir todas as funcionalidades do formulário, utilize as técnicas de teste aprendidas na disciplina de teste de software.
+
+Entrega:
+- No diretório do projeto final  https://1drv.ms/u/s!Avu7qFzImegrh71iLg-02SFGzVPZnw?e=2kom4t crie uma pasta com seu nome para colocar os arquivos do projeto final.
+- Crie um vídeo identificando você, identifique seu computador, explique os testes feitos (e as page objetcs criadas) e mostre os testes executando na sua máquina, o vídeo deve estar na sua pasta do projeto final. 
+
+Prazo para entrega: 18/12/2022
