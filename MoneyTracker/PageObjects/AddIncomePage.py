@@ -19,22 +19,27 @@ class AddIncomePage(BasePage):
     account_list_locator_income = (By.ID, 'android:id/text1')
 
     def account_selector_click(self):
+        self.driver.implicitly_wait(30)
         account_selector = self.driver.find_element(*AddIncomePage.account_selector_locator_income)
         account_selector.click()
 
     def account_list_select(self):
+        self.driver.implicitly_wait(30)
         account_list = self.driver.find_elements(*AddIncomePage.account_list_locator_income)
         account_list[0].click()
 
     def type_price(self, text):
+        self.driver.implicitly_wait(30)
         price = self.driver.find_element(*AddIncomePage.price_locator_income)
         price.send_keys(text)
 
     def type_title(self, text):
+        self.driver.implicitly_wait(30)
         title = self.driver.find_element(*AddIncomePage.title_locator_income)
         title.send_keys(text)
 
     def type_category(self, text):
+        self.driver.implicitly_wait(30)
         category = self.driver.find_element(*AddIncomePage.category_locator_income)
         category.send_keys(text)
 
