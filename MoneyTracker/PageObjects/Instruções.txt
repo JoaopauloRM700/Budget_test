@@ -5,7 +5,7 @@ Criar projeto de automação de teste com Appium utilizando o padrão Page Objec
 Requisitos do Formulário Income/Expense
 
 - Campo price possui limite de 13 caracteres, só aceita números e não pode ser vazio
-- Campo Category não pode ser vazio e spo deve aceitar letras
+- Campo Category não pode ser vazio e so deve aceitar letras
 - Pode salvar income/expense de datas no passado e no presente somente
 - Lista de incomes e expenses salvos devem ser exibidos na tela Records. Para exibir registros de datas anteriores basta clicar no seletor Week (parte superior da tela à direita) e selecionar "All time"
 - incomes/expenses podem ser editados e removidos

@@ -1,7 +1,13 @@
-
 class TestData(object):
+    Price_edit = "60"
     Price = "100"
     Price_13 = "1000000000000"
     Price_14 = "10000000000000"
     Title = "Arroz"
+    Title_edit = "Sanduiche"
     Category = "Comida"
+    Category_edit = "Lanche"
+    Category_num = "Categoria123"
+    Error_field_empty = "Field can't be empty."
+    Error_limit = "You can't be so rich."
+    Error_date_future = "Can't create a record in future."

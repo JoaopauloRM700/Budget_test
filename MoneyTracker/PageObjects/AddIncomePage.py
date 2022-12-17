@@ -17,6 +17,10 @@ class AddIncomePage(BasePage):
     select_time_locator_income = (By.XPATH, "//android.widget.TextView[contains(@text, '8')]")
     ok_time_locator_income = (By.ID, 'android:id/button1')
     account_list_locator_income = (By.ID, 'android:id/text1')
+    error_locator = (By.ID, 'com.blogspot.e_kanivets.moneytracker:id/textinput_error')
+    date_future = (By.XPATH, '//android.view.View[@content-desc="20 December 2022"]')
+    date_past = (By.XPATH, '//android.view.View[@content-desc="12 December 2022"]')
+    message_error_date = (By.XPATH, '/hierarchy/android.widget.Toast')
 
     def account_selector_click(self):
         self.driver.implicitly_wait(30)
@@ -47,7 +51,7 @@ class AddIncomePage(BasePage):
         self.driver.implicitly_wait(30)
         date = self.driver.find_element(*AddIncomePage.date_locator_income)
         # select_date = self.driver.find_element(*AddExpensePage.select_date_locator)
-        #self.driver.hide_keyboard()
+        # self.driver.hide_keyboard()
         date.click()
         ok_date = self.driver.find_element(*AddIncomePage.ok_date_locator_income)
         # select_date.click()
@@ -75,5 +79,30 @@ class AddIncomePage(BasePage):
         save = self.driver.find_element(*AddIncomePage.save_button_locator_income)
         save.click()
 
-    #def select_date_future(self):
+    # def select_date_future(self):
 
+    def get_error_income(self):
+        text_error = self.driver.find_element(*AddIncomePage.error_locator)
+        return text_error.text
+
+    def past_date(self):
+        date = self.driver.find_element(*AddIncomePage.date_locator_income)
+        date.click()
+        select_date = self.driver.find_element(*AddIncomePage.date_past)
+        select_date.click()
+        ok_date = self.driver.find_element(*AddIncomePage.ok_date_locator_income)
+        ok_date.click()
+        self.driver.implicitly_wait(30)
+
+    def future_date(self):
+        date = self.driver.find_element(*AddIncomePage.date_locator_income)
+        date.click()
+        select_date = self.driver.find_element(*AddIncomePage.date_future)
+        select_date.click()
+        ok_date = self.driver.find_element(*AddIncomePage.ok_date_locator_income)
+        ok_date.click()
+        self.driver.implicitly_wait(30)
+
+    def get_error_future_date(self):
+        error_date = self.driver.find_element(*AddIncomePage.message_error_date)
+        return error_date.text
