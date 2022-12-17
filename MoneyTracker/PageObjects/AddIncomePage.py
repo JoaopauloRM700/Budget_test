@@ -16,7 +16,7 @@ class AddIncomePage(BasePage):
     ok_date_locator_income = (By.ID, 'android:id/button1')
     select_time_locator_income = (By.XPATH, "//android.widget.TextView[contains(@text, '8')]")
     ok_time_locator_income = (By.ID, 'android:id/button1')
-    account_list_locator_income = (By.ID, 'android:id/text1')
+    account_list_locator_income = (By.XPATH, '/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.ListView/android.widget.TextView')
     error_locator = (By.ID, 'com.blogspot.e_kanivets.moneytracker:id/textinput_error')
     date_future = (By.XPATH, '//android.view.View[@content-desc="20 December 2022"]')
     date_past = (By.XPATH, '//android.view.View[@content-desc="12 December 2022"]')
@@ -28,7 +28,6 @@ class AddIncomePage(BasePage):
         account_selector.click()
 
     def account_list_select(self):
-        self.driver.implicitly_wait(30)
         account_list = self.driver.find_elements(*AddIncomePage.account_list_locator_income)
         account_list[0].click()
 
